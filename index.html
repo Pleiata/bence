@@ -11,6 +11,8 @@
             color: #fff;
             margin: 0;
             padding: 0;
+            text-align: center;
+            overflow-x: hidden; /* Megakadályozza a vízszintes görgetést */
         }
         .circle-image {
             width: 200px;
@@ -18,7 +20,7 @@
             border-radius: 50%;
             overflow: hidden;
             margin: 20px auto;
-            border: 5px solid #00b3ff; /* Kék szín */
+            border: 5px solid #00b3ff; /* Élénk kék szín */
             box-shadow: 0 0 20px rgba(0, 179, 255, 0.8); /* Kék árnyék */
         }
         .circle-image img {
@@ -28,14 +30,9 @@
         }
         h1 {
             font-size: 36px;
-            text-align: center;
             color: #00b3ff; /* Kék szín */
             text-shadow: 0 0 15px rgba(0, 179, 255, 0.7), 0 0 30px rgba(0, 179, 255, 0.8); /* Kék világítás */
             margin-top: 20px;
-        }
-        #audio-controls {
-            margin-top: 20px;
-            text-align: center;
         }
         .audio-list {
             display: flex;
@@ -49,7 +46,7 @@
             padding: 15px 30px;
             margin: 5px;
             border: 2px solid #00b3ff; /* Kék szegély */
-            font-size: 20px;
+            font-size: 16px;
             cursor: pointer;
             text-transform: uppercase;
             border-radius: 5px;
@@ -68,9 +65,46 @@
             width: 100%;
             max-width: 400px;
             margin: 20px auto;
-            border-radius: 10px;
-            background-color: #222;
+            display: block;
+        }
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: -100%; /* Kezdeti hely balra kívül */
+            width: 100%;
+            background-color: #121212;
+            color: #00b3ff; /* Kék szín */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            animation: slideIn 2s forwards; /* Animáció */
+        }
+        .fixed-footer a {
+            text-decoration: none;
+            color: #00b3ff;
+            margin: 0 15px;
+            padding: 10px 20px;
             border: 2px solid #00b3ff; /* Kék szegély */
+            border-radius: 5px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 179, 255, 0.8); /* Kék fényhatás */
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+        .fixed-footer a:hover {
+            background-color: #00b3ff;
+            color: #121212;
+            box-shadow: 0 0 20px rgba(0, 179, 255, 1); /* Intenzívebb kék fény */
+        }
+        @keyframes slideIn {
+            from {
+                left: -100%; /* Kiindulópont kívülről */
+            }
+            to {
+                left: 0; /* Célpont teljesen látható */
+            }
         }
     </style>
 </head>
@@ -79,10 +113,10 @@
     <h1>Gyuris Bence AI Music</h1>
 
     <div class="circle-image">
-        <img src="bence.jpg" alt="Bence">
+        <img src="bence.jpg" alt="Gyuris Bence">
     </div>
 
-    <div id="audio-controls">
+    <div>
         <audio id="audio-player" controls>
             <source id="audio-source" src="" type="audio/wav">
             Your browser does not support the audio element.
@@ -90,11 +124,17 @@
     </div>
 
     <div class="audio-list" id="audio-list">
-        <!-- A JavaScript fogja feltölteni a zenéket itt -->
+        <!-- JavaScript tölti fel a zenéket -->
+    </div>
+
+    <div class="fixed-footer">
+        <a href="https://www.facebook.com/profile.php?id=100011543171895" target="_blank">Gyuris Bence Facebook</a>
+        <a href="https://www.tiktok.com/@bencegyuris" target="_blank">Gyuris Bence TikTok</a>
+        <a href="https://www.youtube.com/playlist?list=PLxelMVGvFe2NLGABzFM6-YIofVLCOnZg4" target="_blank">További zenék</a>
     </div>
 
     <script>
-        // Zene fájlok listája ABC sorrendben
+        // Zene fájlok listája
         const musicFiles = [
             'aimusic/1990-es évek.wav',
             'aimusic/Autó.wav',
@@ -107,7 +147,7 @@
             'aimusic/Útálom a munkát.wav'
         ];
 
-        // Zene lista generálása
+        // Zene lista megjelenítése
         const audioListContainer = document.getElementById('audio-list');
         musicFiles.forEach((filePath) => {
             const button = document.createElement('button');
@@ -120,7 +160,7 @@
             const audioPlayer = document.getElementById("audio-player");
             const audioSource = document.getElementById("audio-source");
 
-            // Beállítjuk a zenét
+            // Zene beállítása és lejátszása
             audioSource.src = songPath;
             audioPlayer.load();
             audioPlayer.play();
