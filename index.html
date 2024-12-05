@@ -7,12 +7,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #fff;
             margin: 0;
             padding: 0;
             text-align: center;
             overflow-x: hidden; /* Megakadályozza a vízszintes görgetést */
+            background-image: url('music_wall.png'); /* Háttérkép */
+            background-size: cover; /* Arányosan igazítja a képet a képernyőhöz */
+            background-position: center; /* Középre igazítja a képet */
+            background-attachment: fixed; /* Rögzített háttér */
+            color: #fff;
         }
         .circle-image {
             width: 200px;
@@ -72,7 +75,7 @@
             bottom: 0;
             left: -100%; /* Kezdeti hely balra kívül */
             width: 100%;
-            background-color: #121212;
+            background-color: rgba(18, 18, 18, 0.8); /* Átlátszó fekete háttér */
             color: #00b3ff; /* Kék szín */
             display: flex;
             justify-content: center;
